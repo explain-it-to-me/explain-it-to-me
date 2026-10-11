@@ -77,7 +77,7 @@ function handleKeyDown(e) {
 // Handle messages from background script
 function handleMessage(request, sender, sendResponse) {
   try {
-    console.log('📨 Received:', request.action);
+    console.log('Received:', request.action);
 
     switch (request.action) {
       case 'ping':
@@ -107,7 +107,7 @@ function handleMessage(request, sender, sendResponse) {
         sendResponse({ success: false, error: 'Unknown action' });
     }
   } catch (error) {
-    console.error('❌ Error:', error);
+    console.error('Error:', error);
     sendResponse({ success: false, error: error.message });
   }
   return true;
@@ -124,14 +124,14 @@ function showLoadingModal(level) {
   modal.innerHTML = `
     <div class="explainer-modal-content explainer-loading">
       <div class="explainer-header">
-        <h3>${getLevelEmoji(level)} AI is thinking...
+        <h3>Generating explanation
           <span class="explainer-level-badge">${getLevelName(level)}</span>
         </h3>
-        <button class="explainer-close" type="button">&times;</button>
+        <button class="explainer-close" type="button" aria-label="Close">&times;</button>
       </div>
       <div class="explainer-body">
         <div class="explainer-spinner"></div>
-        <p>Crafting your ${getLevelName(level).toLowerCase()} explanation<span class="explainer-loading-dots"></span></p>
+        <p>Preparing a ${getLevelName(level).toLowerCase()} explanation<span class="explainer-loading-dots"></span></p>
       </div>
     </div>
   `;
@@ -180,31 +180,31 @@ function updateModalContent(content, explanation, originalText, level) {
 
   content.innerHTML = `
     <div class="explainer-header">
-      <h3>${getLevelEmoji(level)} Explanation Ready!
+      <h3>Explanation
         <span class="explainer-level-badge">${getLevelName(level)}</span>
       </h3>
-      <button class="explainer-close" type="button">&times;</button>
+      <button class="explainer-close" type="button" aria-label="Close">&times;</button>
     </div>
     <div class="explainer-body">
       <div class="explainer-original">
-        <h4>📝 Original Text</h4>
+        <h4>Original text</h4>
         <p>"${truncateText(originalText, 250)}"</p>
       </div>
       <div class="explainer-explanation">
-        <h4>✨ ${getLevelName(level)} Explanation</h4>
+        <h4>${getLevelName(level)} explanation</h4>
         <div class="explainer-content">${html}</div>
       </div>
     </div>
     <div class="explainer-footer">
       <button class="explainer-btn explainer-btn-chat explainer-followup-btn" type="button">
-        💬 Ask Follow-up
+        Ask a follow-up
       </button>
       <div class="explainer-footer-right">
         <button class="explainer-btn explainer-btn-secondary explainer-copy-btn" type="button" data-text="${escapeForTemplate(explanation)}">
-          📋 Copy
+          Copy
         </button>
         <button class="explainer-btn explainer-btn-primary explainer-close-btn" type="button">
-          ✓ Done
+          Done
         </button>
       </div>
     </div>
@@ -224,31 +224,31 @@ function createNewExplanationModal(explanation, originalText, level) {
   modal.innerHTML = `
     <div class="explainer-modal-content">
       <div class="explainer-header">
-        <h3>${getLevelEmoji(level)} Explanation Ready!
+        <h3>Explanation
           <span class="explainer-level-badge">${getLevelName(level)}</span>
         </h3>
-        <button class="explainer-close" type="button">&times;</button>
+        <button class="explainer-close" type="button" aria-label="Close">&times;</button>
       </div>
       <div class="explainer-body">
         <div class="explainer-original">
-          <h4>📝 Original Text</h4>
+          <h4>Original text</h4>
           <p>"${truncateText(originalText, 250)}"</p>
         </div>
         <div class="explainer-explanation">
-          <h4>✨ ${getLevelName(level)} Explanation</h4>
+          <h4>${getLevelName(level)} explanation</h4>
           <div class="explainer-content">${html}</div>
         </div>
       </div>
       <div class="explainer-footer">
         <button class="explainer-btn explainer-btn-chat explainer-followup-btn" type="button">
-          💬 Ask Follow-up
+          Ask a follow-up
         </button>
         <div class="explainer-footer-right">
           <button class="explainer-btn explainer-btn-secondary explainer-copy-btn" type="button" data-text="${escapeForTemplate(explanation)}">
-            📋 Copy
+            Copy
           </button>
           <button class="explainer-btn explainer-btn-primary explainer-close-btn" type="button">
-            ✓ Done
+            Done
           </button>
         </div>
       </div>
@@ -273,16 +273,16 @@ function showErrorModal(error) {
   modal.innerHTML = `
     <div class="explainer-modal-content explainer-error">
       <div class="explainer-header">
-        <h3>🚨 Oops! Something went wrong</h3>
-        <button class="explainer-close" type="button">&times;</button>
+        <h3>Something went wrong</h3>
+        <button class="explainer-close" type="button" aria-label="Close">&times;</button>
       </div>
       <div class="explainer-body">
         <p class="explainer-error-message">${error}</p>
-        <p class="explainer-error-help">Please try again in a moment, or try selecting a smaller piece of text.</p>
+        <p class="explainer-error-help">Please try again, or select a shorter passage.</p>
       </div>
       <div class="explainer-footer">
         <button class="explainer-btn explainer-btn-primary explainer-close-btn" type="button">
-          🔄 I'll try again
+          Close
         </button>
       </div>
     </div>
@@ -311,7 +311,7 @@ function openChatPanel() {
   chatPanel.className = 'explainer-chat-panel';
   chatPanel.innerHTML = `
     <div class="explainer-chat-header">
-      <h4>💬 Follow-up Chat</h4>
+      <h4>Follow-up</h4>
       <button class="explainer-chat-close" type="button">&times;</button>
     </div>
     <div class="explainer-chat-messages" id="chat-messages">
@@ -456,7 +456,7 @@ function handleFollowUpError(error) {
   // Add error message
   const errorMsg = document.createElement('div');
   errorMsg.className = 'explainer-chat-message explainer-chat-error';
-  errorMsg.innerHTML = `<p>❌ ${error}</p>`;
+  errorMsg.innerHTML = `<p>${escapeHtml(error)}</p>`;
   messagesContainer.appendChild(errorMsg);
 
   // Scroll to bottom
@@ -535,13 +535,8 @@ function removeModal() {
 }
 
 // Utility functions
-function getLevelEmoji(level) {
-  const emojis = { grade5: '🎈', highschool: '🎓', college: '🏛️', expert: '🔬' };
-  return emojis[level] || '✨';
-}
-
 function getLevelName(level) {
-  const names = { grade5: 'Kid-Friendly', highschool: 'High School', college: 'College', expert: 'Expert' };
+  const names = { grade5: 'Kid-friendly', highschool: 'High school', college: 'College', expert: 'Expert' };
   return names[level] || 'Standard';
 }
 
@@ -564,7 +559,7 @@ async function copyToClipboard(text, button) {
   try {
     await navigator.clipboard.writeText(text);
     const originalText = button.textContent;
-    button.textContent = '✅ Copied!';
+    button.textContent = 'Copied';
     setTimeout(() => { button.textContent = originalText; }, 2000);
   } catch (err) {
     console.error('Copy failed:', err);
@@ -574,17 +569,15 @@ async function copyToClipboard(text, button) {
 // Get modal styles (include your CSS here)
 function getModalStyles() {
   return `
-    /* Base Modal Styles */
     .explainer-modal {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px);
+      background: rgba(17, 24, 39, 0.55); backdrop-filter: blur(6px);
       display: flex; align-items: center; justify-content: center;
-      opacity: 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      opacity: 0; transition: opacity 0.2s ease;
+      font-family: Inter, "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #111827;
     }
     .explainer-modal.explainer-show { opacity: 1; }
-    
-    /* Split view when chat is open */
     .explainer-modal.explainer-split-view {
       justify-content: flex-start;
       padding-left: 5%;
@@ -593,264 +586,273 @@ function getModalStyles() {
       max-width: 55%;
       margin-right: 20px;
     }
-    
     .explainer-modal-content {
-      background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-      border-radius: 20px; max-width: 700px; width: 92%; max-height: 85vh;
-      overflow: hidden; transform: scale(0.9) translateY(20px);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      background: #fff;
+      border-radius: 12px;
+      max-width: 680px;
+      width: 92%;
+      max-height: 85vh;
+      overflow: hidden;
+      transform: translateY(8px);
+      transition: transform 0.2s ease;
+      box-shadow: 0 24px 48px rgba(17, 24, 39, 0.18);
+      border: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
     }
-    .explainer-modal.explainer-show .explainer-modal-content { transform: scale(1) translateY(0); }
-    
+    .explainer-modal.explainer-show .explainer-modal-content { transform: translateY(0); }
     .explainer-header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white; padding: 24px 28px; display: flex;
-      align-items: center; justify-content: space-between;
+      background: #111827;
+      color: #fff;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
     }
-    .explainer-header h3 { margin: 0; font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 12px; }
-    .explainer-level-badge { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; }
-    .explainer-close { background: rgba(255,255,255,0.2); border: none; color: white; width: 36px; height: 36px; border-radius: 50%; font-size: 24px; cursor: pointer; }
-    .explainer-close:hover { background: rgba(255,255,255,0.3); }
-    .explainer-body { padding: 28px; overflow-y: auto; max-height: 60vh; }
-    .explainer-original { background: #f1f5f9; border-radius: 12px; padding: 16px; margin-bottom: 20px; }
-    .explainer-original h4, .explainer-explanation h4 { margin: 0 0 8px 0; font-size: 14px; color: #64748b; }
-    .explainer-original p { margin: 0; font-style: italic; color: #475569; }
-    .explainer-content { line-height: 1.7; color: #334155; }
-    
-    .explainer-footer { 
-      padding: 20px 28px; background: #f8fafc; border-top: 1px solid #e2e8f0; 
-      display: flex; gap: 12px; justify-content: space-between; align-items: center;
+    .explainer-header h3 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: -0.01em;
     }
-    .explainer-footer-right { display: flex; gap: 12px; }
-    
-    .explainer-btn { padding: 12px 24px; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
-    .explainer-btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
-    .explainer-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
-    .explainer-btn-secondary { background: white; color: #667eea; border: 2px solid #667eea; }
-    .explainer-btn-chat { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; }
-    .explainer-btn-chat:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4); }
-    
-    .explainer-spinner { width: 48px; height: 48px; border: 4px solid #e2e8f0; border-top-color: #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto; }
+    .explainer-level-badge {
+      background: rgba(255,255,255,0.12);
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+    .explainer-close {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .explainer-close:hover { background: rgba(255,255,255,0.08); }
+    .explainer-body { padding: 20px; overflow-y: auto; max-height: 60vh; background: #fff; }
+    .explainer-original {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+    }
+    .explainer-original h4, .explainer-explanation h4 {
+      margin: 0 0 8px 0;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #6b7280;
+    }
+    .explainer-original p { margin: 0; color: #4b5563; font-size: 14px; line-height: 1.55; }
+    .explainer-content { line-height: 1.7; color: #1f2937; font-size: 15px; }
+    .explainer-footer {
+      padding: 14px 20px;
+      background: #f9fafb;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .explainer-footer-right { display: flex; gap: 8px; }
+    .explainer-btn {
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      font-family: inherit;
+    }
+    .explainer-btn-primary { background: #111827; color: #fff; }
+    .explainer-btn-primary:hover { background: #1f2937; }
+    .explainer-btn-secondary { background: #fff; color: #111827; border-color: #e5e7eb; }
+    .explainer-btn-secondary:hover { background: #f9fafb; }
+    .explainer-btn-chat { background: #fff; color: #111827; border-color: #e5e7eb; }
+    .explainer-btn-chat:hover { background: #f9fafb; }
+    .explainer-spinner {
+      width: 28px; height: 28px;
+      border: 2px solid #e5e7eb;
+      border-top-color: #111827;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 28px auto 16px;
+    }
     @keyframes spin { to { transform: rotate(360deg); } }
+    .explainer-loading p { text-align: center; color: #6b7280; font-size: 14px; }
     .explainer-loading-dots::after { content: ''; animation: dots 1.5s infinite; }
     @keyframes dots { 0%, 20% { content: ''; } 40% { content: '.'; } 60% { content: '..'; } 80%, 100% { content: '...'; } }
-    .explainer-error-message { color: #dc2626; font-weight: 500; }
-    .explainer-error-help { color: #64748b; font-size: 14px; }
-    
-    /* Markdown Styles */
+    .explainer-error-message { color: #b91c1c; font-weight: 500; margin: 0 0 8px; }
+    .explainer-error-help { color: #6b7280; font-size: 14px; margin: 0; }
     .explainer-content h1, .explainer-content h2, .explainer-content h3, .explainer-content h4 {
-      margin: 1em 0 0.5em 0; font-weight: 600; color: #1e293b;
+      margin: 1em 0 0.5em 0; font-weight: 600; color: #111827;
     }
-    .explainer-content h1 { font-size: 1.5em; }
-    .explainer-content h2 { font-size: 1.3em; }
-    .explainer-content h3 { font-size: 1.15em; }
+    .explainer-content h1 { font-size: 1.35em; }
+    .explainer-content h2 { font-size: 1.2em; }
+    .explainer-content h3 { font-size: 1.08em; }
     .explainer-content p { margin: 0 0 1em 0; }
     .explainer-content ul, .explainer-content ol { margin: 0 0 1em 1.5em; padding: 0; }
-    .explainer-content li { margin-bottom: 0.5em; }
+    .explainer-content li { margin-bottom: 0.4em; }
     .explainer-content code {
-      background: #f1f5f9; padding: 2px 6px; border-radius: 4px;
-      font-family: 'SF Mono', Monaco, Consolas, monospace; font-size: 0.9em; color: #e11d48;
+      background: #f3f4f6; padding: 2px 6px; border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.9em; color: #111827;
     }
     .explainer-content pre {
-      background: #1e293b; color: #e2e8f0; padding: 16px; border-radius: 8px;
+      background: #111827; color: #e5e7eb; padding: 14px; border-radius: 8px;
       overflow-x: auto; margin: 1em 0;
     }
     .explainer-content pre code { background: none; color: inherit; padding: 0; }
     .explainer-content blockquote {
-      border-left: 4px solid #667eea; margin: 1em 0; padding-left: 16px;
-      color: #64748b; font-style: italic;
+      border-left: 2px solid #d1d5db; margin: 1em 0; padding-left: 14px;
+      color: #6b7280;
     }
-    .explainer-content strong { font-weight: 600; color: #1e293b; }
-    .explainer-content em { font-style: italic; }
-    .explainer-content a { color: #667eea; text-decoration: underline; }
-    
-    /* ============= CHAT PANEL STYLES ============= */
+    .explainer-content strong { font-weight: 600; }
+    .explainer-content a { color: #2563eb; }
     .explainer-chat-panel {
       position: fixed;
       top: 50%;
       right: -400px;
       transform: translateY(-50%);
-      width: 380px;
+      width: 360px;
       max-height: 85vh;
-      background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-      border-radius: 20px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 24px 48px rgba(17, 24, 39, 0.18);
       display: flex;
       flex-direction: column;
-      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      transition: right 0.25s ease;
+      font-family: Inter, "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
       overflow: hidden;
     }
-    .explainer-chat-panel.explainer-chat-show {
-      right: 5%;
-    }
-    
+    .explainer-chat-panel.explainer-chat-show { right: 5%; }
     .explainer-chat-header {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: white;
-      padding: 16px 20px;
+      background: #111827;
+      color: #fff;
+      padding: 14px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .explainer-chat-header h4 {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 600;
-    }
+    .explainer-chat-header h4 { margin: 0; font-size: 14px; font-weight: 600; }
     .explainer-chat-close {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: white;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      font-size: 20px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      font-size: 18px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-    .explainer-chat-close:hover {
-      background: rgba(255,255,255,0.3);
-    }
-    
     .explainer-chat-messages {
       flex: 1;
       overflow-y: auto;
       padding: 16px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      min-height: 300px;
+      gap: 10px;
+      min-height: 280px;
       max-height: calc(85vh - 140px);
     }
-    
-    .explainer-chat-welcome {
-      text-align: center;
-      color: #64748b;
-      font-size: 14px;
-      padding: 40px 20px;
-    }
-    
+    .explainer-chat-welcome { text-align: center; color: #6b7280; font-size: 13px; padding: 36px 16px; }
     .explainer-chat-message {
       max-width: 85%;
-      padding: 12px 16px;
-      border-radius: 16px;
-      font-size: 14px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 13px;
       line-height: 1.5;
     }
     .explainer-chat-user {
       align-self: flex-end;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      border-bottom-right-radius: 4px;
+      background: #111827;
+      color: #fff;
     }
     .explainer-chat-user p { margin: 0; }
-    
     .explainer-chat-assistant {
       align-self: flex-start;
-      background: #f1f5f9;
-      color: #334155;
-      border-bottom-left-radius: 4px;
+      background: #f3f4f6;
+      color: #1f2937;
     }
-    
-    .explainer-chat-content { line-height: 1.6; }
     .explainer-chat-content p { margin: 0 0 0.5em 0; }
     .explainer-chat-content p:last-child { margin-bottom: 0; }
     .explainer-chat-content code {
-      background: #e2e8f0; padding: 2px 4px; border-radius: 3px;
-      font-size: 0.85em; color: #e11d48;
+      background: #e5e7eb; padding: 2px 4px; border-radius: 3px; font-size: 0.85em;
     }
     .explainer-chat-content pre {
-      background: #1e293b; color: #e2e8f0; padding: 12px;
-      border-radius: 8px; overflow-x: auto; margin: 0.5em 0;
+      background: #111827; color: #e5e7eb; padding: 10px; border-radius: 8px; overflow-x: auto;
     }
     .explainer-chat-content pre code { background: none; color: inherit; padding: 0; }
     .explainer-chat-content ul, .explainer-chat-content ol { margin: 0.5em 0 0.5em 1.2em; padding: 0; }
-    .explainer-chat-content li { margin-bottom: 0.3em; }
-    
     .explainer-chat-error {
       align-self: flex-start;
       background: #fef2f2;
-      color: #dc2626;
+      color: #b91c1c;
       border: 1px solid #fecaca;
     }
     .explainer-chat-error p { margin: 0; }
-    
-    .explainer-chat-loading {
-      padding: 16px;
-    }
-    .explainer-chat-typing {
-      display: flex;
-      gap: 4px;
-    }
+    .explainer-chat-typing { display: flex; gap: 4px; }
     .explainer-chat-typing span {
-      width: 8px;
-      height: 8px;
-      background: #94a3b8;
-      border-radius: 50%;
+      width: 6px; height: 6px; background: #9ca3af; border-radius: 50%;
       animation: typing 1.4s infinite ease-in-out;
     }
-    .explainer-chat-typing span:nth-child(1) { animation-delay: 0s; }
     .explainer-chat-typing span:nth-child(2) { animation-delay: 0.2s; }
     .explainer-chat-typing span:nth-child(3) { animation-delay: 0.4s; }
     @keyframes typing {
       0%, 60%, 100% { transform: translateY(0); }
-      30% { transform: translateY(-8px); }
+      30% { transform: translateY(-6px); }
     }
-    
     .explainer-chat-input-container {
-      padding: 16px;
-      background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
+      padding: 12px;
+      background: #f9fafb;
+      border-top: 1px solid #e5e7eb;
       display: flex;
       gap: 8px;
       align-items: flex-end;
     }
     .explainer-chat-input {
       flex: 1;
-      border: 2px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 12px 16px;
-      font-size: 14px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
       resize: none;
       outline: none;
       font-family: inherit;
       max-height: 120px;
-      transition: border-color 0.2s;
     }
-    .explainer-chat-input:focus {
-      border-color: #667eea;
-    }
-    .explainer-chat-input::placeholder {
-      color: #94a3b8;
-    }
+    .explainer-chat-input:focus { border-color: #111827; }
     .explainer-chat-send {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: #111827;
       border: none;
-      color: white;
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
       flex-shrink: 0;
     }
-    .explainer-chat-send:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-    }
-    
-    /* Mobile responsive */
+    .explainer-chat-send:hover { background: #1f2937; }
     @media (max-width: 900px) {
       .explainer-modal.explainer-split-view {
         flex-direction: column;
-        padding: 20px;
+        padding: 16px;
         justify-content: flex-start;
       }
       .explainer-modal.explainer-split-view .explainer-modal-content {
@@ -866,9 +868,6 @@ function getModalStyles() {
         transform: none;
         width: 100%;
         max-height: 40vh;
-      }
-      .explainer-chat-panel.explainer-chat-show {
-        right: auto !important;
       }
     }
   `;

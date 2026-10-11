@@ -14,7 +14,8 @@
     "https://api.openai.com/*",
     "https://uamas.openai.azure.com/*",
     "https://api-inference.huggingface.co/*",
-    "https://router.huggingface.co/*"
+    "https://router.huggingface.co/*",
+    "http://localhost:8080/*"
   ],
   "background": {
     "service_worker": "background.js",

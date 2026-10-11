@@ -1,19 +1,19 @@
-import { simplifyText, askFollowUp } from './api_v2.js';
+import { simplifyText, askFollowUp } from './api.js';
 
 // Background script for handling API calls and context menus
 chrome.runtime.onInstalled.addListener(() => {
   // Create context menu items for different simplification levels
   const levels = [
-    { id: 'grade5', title: '🎈 Like I\'m 5 years old', emoji: '🎈' },
-    { id: 'highschool', title: '🎓 High School Level', emoji: '🎓' },
-    { id: 'college', title: '🏛️ College Level', emoji: '🏛️' },
-    { id: 'expert', title: '🔬 Expert Analysis', emoji: '🔬' }
+    { id: 'grade5', title: 'Kid-friendly' },
+    { id: 'highschool', title: 'High school' },
+    { id: 'college', title: 'College' },
+    { id: 'expert', title: 'Expert' }
   ];
 
   // Create parent menu item
   chrome.contextMenus.create({
     id: 'explainItToMe',
-    title: '✨ Explain It to Me',
+    title: 'Explain It to Me',
     contexts: ['selection']
   });
 

@@ -1,448 +1,219 @@
-/* Enhanced modal styles with bulletproof protection */
-
 .explainer-modal {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  background: rgba(0, 0, 0, 0.6) !important;
-  backdrop-filter: blur(8px) !important;
+  background: rgba(17, 24, 39, 0.55) !important;
+  backdrop-filter: blur(6px) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   z-index: 2147483647 !important;
   opacity: 0 !important;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif !important;
+  transition: opacity 0.2s ease !important;
+  font-family: Inter, "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif !important;
   pointer-events: auto !important;
-  visibility: visible !important;
 }
 
 .explainer-modal.explainer-show {
   opacity: 1 !important;
-  visibility: visible !important;
 }
 
 .explainer-modal-content {
-  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%) !important;
-  border-radius: 20px !important;
-  box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.25),
-    0 0 0 1px rgba(255, 255, 255, 0.8),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
-  max-width: 700px !important;
+  background: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 24px 48px rgba(17, 24, 39, 0.18) !important;
+  border: 1px solid #e5e7eb !important;
+  max-width: 680px !important;
   width: 92% !important;
   max-height: 85vh !important;
   overflow: hidden !important;
-  transform: scale(0.9) translateY(20px) !important;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  position: relative !important;
+  transform: translateY(8px) !important;
+  transition: transform 0.2s ease !important;
   margin: 0 !important;
   padding: 0 !important;
-  visibility: visible !important;
-  display: block !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .explainer-modal.explainer-show .explainer-modal-content {
-  transform: scale(1) translateY(0) !important;
-  visibility: visible !important;
+  transform: translateY(0) !important;
 }
 
 .explainer-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-  color: white !important;
-  padding: 24px 28px !important;
+  background: #111827 !important;
+  color: #fff !important;
+  padding: 16px 20px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  position: relative !important;
-  overflow: hidden !important;
+  gap: 12px !important;
   margin: 0 !important;
-}
-
-.explainer-header::before {
-  content: '' !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%) !important;
-  pointer-events: none !important;
 }
 
 .explainer-header h3 {
   margin: 0 !important;
-  font-size: 22px !important;
-  font-weight: 700 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
   display: flex !important;
   align-items: center !important;
-  gap: 12px !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-  color: white !important;
+  gap: 10px !important;
+  color: #fff !important;
 }
 
 .explainer-level-badge {
-  background: rgba(255, 255, 255, 0.2) !important;
-  padding: 6px 12px !important;
-  border-radius: 20px !important;
-  font-size: 14px !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  padding: 3px 8px !important;
+  border-radius: 999px !important;
+  font-size: 11px !important;
   font-weight: 500 !important;
-  backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #e5e7eb !important;
 }
 
 .explainer-close {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border: none !important;
-  color: white !important;
-  font-size: 24px !important;
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #fff !important;
+  font-size: 20px !important;
   cursor: pointer !important;
-  padding: 8px 12px !important;
-  border-radius: 12px !important;
-  transition: all 0.3s ease !important;
-  backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
   outline: none !important;
-  z-index: 999999 !important;
-  position: relative !important;
 }
 
 .explainer-close:hover {
-  background: rgba(255, 255, 255, 0.2) !important;
-  transform: scale(1.05) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
 .explainer-body {
-  padding: 32px 28px !important;
+  padding: 20px !important;
   max-height: 55vh !important;
   overflow-y: auto !important;
-  background: linear-gradient(to bottom, #ffffff, #f8fafc) !important;
+  background: #fff !important;
   margin: 0 !important;
 }
 
-.explainer-body::-webkit-scrollbar {
-  width: 6px !important;
-}
-
-.explainer-body::-webkit-scrollbar-track {
-  background: #f1f5f9 !important;
-  border-radius: 3px !important;
-}
-
-.explainer-body::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #cbd5e1, #94a3b8) !important;
-  border-radius: 3px !important;
-}
-
 .explainer-original {
-  margin-bottom: 28px !important;
-  padding: 20px !important;
-  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%) !important;
-  border-radius: 16px !important;
-  border-left: 5px solid #3b82f6 !important;
-  position: relative !important;
-  overflow: hidden !important;
+  margin-bottom: 18px !important;
+  padding: 12px 14px !important;
+  background: #f9fafb !important;
+  border-radius: 8px !important;
+  border: 1px solid #e5e7eb !important;
 }
 
-.explainer-original::before {
-  content: '📝' !important;
-  position: absolute !important;
-  top: 16px !important;
-  right: 20px !important;
-  font-size: 20px !important;
-  opacity: 0.3 !important;
-}
-
-.explainer-original h4 {
-  margin: 0 0 12px 0 !important;
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  color: #475569 !important;
+.explainer-original h4,
+.explainer-explanation h4 {
+  margin: 0 0 8px 0 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #6b7280 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.1em !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
+  letter-spacing: 0.06em !important;
 }
 
 .explainer-original p {
   margin: 0 !important;
-  color: #64748b !important;
-  font-style: italic !important;
-  line-height: 1.6 !important;
-  font-size: 15px !important;
-}
-
-.explainer-explanation {
-  position: relative !important;
-}
-
-.explainer-explanation h4 {
-  margin: 0 0 20px 0 !important;
+  color: #4b5563 !important;
+  line-height: 1.55 !important;
   font-size: 14px !important;
-  font-weight: 700 !important;
-  color: #475569 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.1em !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
 }
 
 .explainer-content {
   color: #1f2937 !important;
   line-height: 1.7 !important;
-  font-size: 16px !important;
-}
-
-.explainer-content p {
-  margin: 0 0 18px 0 !important;
-}
-
-.explainer-content p:last-child {
-  margin-bottom: 0 !important;
+  font-size: 15px !important;
 }
 
 .explainer-footer {
-  padding: 24px 28px !important;
-  background: linear-gradient(to right, #f8fafc, #f1f5f9) !important;
-  border-top: 1px solid #e2e8f0 !important;
+  padding: 14px 20px !important;
+  background: #f9fafb !important;
+  border-top: 1px solid #e5e7eb !important;
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
-  gap: 16px !important;
+  gap: 8px !important;
   margin: 0 !important;
 }
 
 .explainer-btn {
-  padding: 12px 24px !important;
-  border-radius: 12px !important;
-  border: none !important;
+  padding: 9px 14px !important;
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
   font-weight: 600 !important;
   cursor: pointer !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  font-size: 14px !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  position: relative !important;
-  overflow: hidden !important;
+  font-size: 13px !important;
   outline: none !important;
-  text-decoration: none !important;
-  z-index: 999999 !important;
-}
-
-.explainer-btn::before {
-  content: '' !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: -100% !important;
-  width: 100% !important;
-  height: 100% !important;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) !important;
-  transition: left 0.5s !important;
-}
-
-.explainer-btn:hover::before {
-  left: 100% !important;
 }
 
 .explainer-btn-primary {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
-  color: white !important;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3) !important;
-}
-
-.explainer-btn-primary:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4) !important;
+  background: #111827 !important;
+  color: #fff !important;
 }
 
 .explainer-btn-secondary {
-  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%) !important;
-  color: #374151 !important;
-  border: 1px solid #d1d5db !important;
+  background: #fff !important;
+  color: #111827 !important;
+  border-color: #e5e7eb !important;
 }
 
-.explainer-btn-secondary:hover {
-  background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Enhanced loading state */
 .explainer-loading .explainer-body {
   text-align: center !important;
-  padding: 60px 28px !important;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+  padding: 48px 20px !important;
 }
 
 .explainer-spinner {
-  width: 50px !important;
-  height: 50px !important;
-  border: 4px solid #e5e7eb !important;
-  border-top: 4px solid #3b82f6 !important;
+  width: 28px !important;
+  height: 28px !important;
+  border: 2px solid #e5e7eb !important;
+  border-top: 2px solid #111827 !important;
   border-radius: 50% !important;
-  animation: explainer-spin 1s linear infinite !important;
-  margin: 0 auto 24px !important;
-  position: relative !important;
-}
-
-.explainer-spinner::after {
-  content: '' !important;
-  position: absolute !important;
-  top: 2px !important;
-  left: 2px !important;
-  right: 2px !important;
-  bottom: 2px !important;
-  border: 2px solid transparent !important;
-  border-top: 2px solid #60a5fa !important;
-  border-radius: 50% !important;
-  animation: explainer-spin 0.7s linear infinite reverse !important;
+  animation: explainer-spin 0.7s linear infinite !important;
+  margin: 0 auto 16px !important;
 }
 
 @keyframes explainer-spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
 .explainer-loading p {
   color: #6b7280 !important;
   margin: 0 !important;
-  font-size: 16px !important;
-  font-weight: 500 !important;
-}
-
-.explainer-loading-dots {
-  display: inline-block !important;
-  animation: explainer-dots 1.5s infinite !important;
-}
-
-@keyframes explainer-dots {
-
-  0%,
-  20% {
-    content: '';
-  }
-
-  40% {
-    content: '.';
-  }
-
-  60% {
-    content: '..';
-  }
-
-  80%,
-  100% {
-    content: '...';
-  }
-}
-
-/* Enhanced error state */
-.explainer-error .explainer-header {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  font-size: 14px !important;
 }
 
 .explainer-error-message {
-  color: #dc2626 !important;
-  font-weight: 600 !important;
-  margin-bottom: 16px !important;
-  font-size: 16px !important;
+  color: #b91c1c !important;
+  font-weight: 500 !important;
+  margin-bottom: 8px !important;
 }
 
 .explainer-error-help {
   color: #6b7280 !important;
   font-size: 14px !important;
   margin: 0 !important;
-  line-height: 1.5 !important;
 }
 
-/* Mobile responsiveness with enhanced design */
 @media (max-width: 640px) {
   .explainer-modal-content {
     width: 96% !important;
     max-height: 92vh !important;
-    border-radius: 16px !important;
-  }
-
-  .explainer-header {
-    padding: 20px 24px !important;
-  }
-
-  .explainer-header h3 {
-    font-size: 20px !important;
-  }
-
-  .explainer-body {
-    padding: 24px 20px !important;
   }
 
   .explainer-footer {
-    padding: 20px 24px !important;
     flex-direction: column !important;
   }
 
   .explainer-btn {
     width: 100% !important;
-    justify-content: center !important;
   }
 }
 
-/* Floating animation for modal entrance */
-@keyframes float-in {
-  0% {
-    opacity: 0;
-    transform: scale(0.8) translateY(40px) rotate(2deg);
-  }
-
-  50% {
-    transform: scale(1.02) translateY(-5px) rotate(-1deg);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0) rotate(0deg);
-  }
-}
-
-.explainer-modal.explainer-show .explainer-modal-content {
-  animation: float-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-/* Ensure the modal doesn't interfere with page content */
 .explainer-modal * {
   box-sizing: border-box !important;
 }
 
-/* Success animation for copy button */
-@keyframes success-pulse {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.05);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-.explainer-btn.success {
-  animation: success-pulse 0.3s ease !important;
-}
-
-/* Ensure modal container doesn't interfere */
 #explainer-modal-container {
   position: fixed !important;
   top: 0 !important;
@@ -451,53 +222,49 @@
   height: 100% !important;
   z-index: 2147483647 !important;
   pointer-events: none !important;
-  visibility: visible !important;
 }
 
-/* Force visibility and prevent hiding */
-.explainer-modal,
-.explainer-modal-content,
-.explainer-header,
-.explainer-body,
-.explainer-footer {
-  visibility: visible !important;
-  display: block !important;
-}
-
-.explainer-modal {
-  display: flex !important;
-}
-
-.explainer-footer {
-  display: flex !important;
-}
-
-/* Prevent any external styles from hiding our modal */
-.explainer-modal[style*="display: none"] {
-  display: flex !important;
-}
-
-.explainer-modal[style*="visibility: hidden"] {
-  visibility: visible !important;
-}
-
-.explainer-modal[style*="opacity: 0"]:not(.explainer-show) {
-  opacity: 0 !important;
-}
-
-.explainer-modal.explainer-show[style*="opacity: 0"] {
-  opacity: 1 !important;
-}
-
-/* new additions */
 .explainer-content h1,
 .explainer-content h2,
-.explainer-content h3 { margin: 16px 0 8px; font-weight: 600; }
-.explainer-content p { margin: 8px 0; line-height: 1.6; }
-.explainer-content ul, .explainer-content ol { margin: 8px 0; padding-left: 24px; }
-.explainer-content li { margin: 4px 0; }
-.explainer-content code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
-.explainer-content pre { background: #1e293b; color: #e2e8f0; padding: 16px; border-radius: 8px; overflow-x: auto; }
-.explainer-content pre code { background: none; padding: 0; }
-.explainer-content strong { font-weight: 600; }
-.explainer-content blockquote { border-left: 3px solid #667eea; padding-left: 12px; margin: 8px 0; color: #64748b; }
+.explainer-content h3 {
+  margin: 16px 0 8px;
+  font-weight: 600;
+}
+
+.explainer-content p {
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.explainer-content ul,
+.explainer-content ol {
+  margin: 8px 0;
+  padding-left: 24px;
+}
+
+.explainer-content code {
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.explainer-content pre {
+  background: #111827;
+  color: #e5e7eb;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.explainer-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.explainer-content blockquote {
+  border-left: 2px solid #d1d5db;
+  padding-left: 12px;
+  margin: 8px 0;
+  color: #6b7280;
+}
