@@ -135,7 +135,7 @@ func main() {
 
 		result, err := client.Models.GenerateContent(
 			geminiCtx,
-			"gemini-3.8-flash",
+			"gemini-3.5-flash-lite",
 			genai.Text(input),
 			nil,
 		)
@@ -223,7 +223,7 @@ func main() {
 
 		result, err := client.Models.GenerateContent(
 			geminiCtx,
-			"gemini-3.8-flash",
+			"gemini-3.5-flash-lite",
 			genai.Text(input),
 			nil,
 		)

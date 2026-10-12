@@ -39,7 +39,7 @@ async function ensureContentScript(tabId) {
     try {
       await chrome.scripting.executeScript({
         target: { tabId: tabId },
-        files: ['content.js']
+        files: ['libs/marked.min.js', 'content.js']
       });
 
       await chrome.scripting.insertCSS({
