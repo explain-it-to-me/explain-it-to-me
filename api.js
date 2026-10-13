@@ -1,4 +1,4 @@
-const BACKEND_API = 'http://localhost:8080/api/v1';
+const BACKEND_API = 'https://explain-it-to-me.onrender.com/api/v1';
 
 async function requestBackend(path, body, responseField) {
     const response = await fetch(`${BACKEND_API}${path}`, {
